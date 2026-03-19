@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warning.mapper.WarningInfoMapper">
+
+    <insert id="insert" parameterType="com.warning.entity.WarningInfo">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT seq_warning_info.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO warning_info (
+            id, station_code, station_name, lon, lat, warning_type, warning_level,
+            actual_value, forecast_value, forecast_time, forecast_period, create_time
+        ) VALUES (
+            #{id}, #{stationCode}, #{stationName}, #{lon}, #{lat}, #{warningType}, #{warningLevel},
+            #{actualValue}, #{forecastValue}, #{forecastTime}, #{forecastPeriod}, #{createTime}
+        )
+    </insert>
+
+</mapper>

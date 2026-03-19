@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warning.mapper.GeoLineNodeMapper">
+
+    <insert id="insert" parameterType="com.warning.entity.GeoLineNode">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT seq_geo_line_node.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO geo_line_node (
+            id, object_id, seq, name, code, lon, lat, properties,
+            company, road_code, road_name, create_time
+        ) VALUES (
+            #{id}, #{objectId}, #{seq}, #{name}, #{code}, #{lon}, #{lat}, #{properties},
+            #{company}, #{roadCode}, #{roadName}, #{createTime}
+        )
+    </insert>
+
+</mapper>
