@@ -1,6 +1,7 @@
 package com.warning.controller;
 
 import com.warning.dto.PageResult;
+import com.warning.dto.RouteWarningStatDTO;
 import com.warning.dto.WarningQueryDTO;
 import com.warning.dto.WarningStatisticsDTO;
 import com.warning.entity.WarningInfo;
@@ -189,6 +190,25 @@ public class WarningController {
         Map<String, Object> result = new HashMap<>();
         result.put("status", "UP");
         result.put("service", "route-warning-service");
+        return result;
+    }
+
+    /**
+     * 统计每条线路的预警情况（各级别预警节点数、最高风险级别）
+     */
+    @GetMapping("/warning/route/statistics")
+    public Map<String, Object> getRouteWarningStatistics() {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            List<RouteWarningStatDTO> data = warningQueryService.getRouteWarningStatistics();
+            result.put("success", true);
+            result.put("data", data);
+            result.put("total", data.size());
+        } catch (Exception e) {
+            log.error("统计线路预警失败", e);
+            result.put("success", false);
+            result.put("message", "统计失败: " + e.getMessage());
+        }
         return result;
     }
 }
