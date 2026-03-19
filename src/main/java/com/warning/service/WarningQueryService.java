@@ -3,9 +3,12 @@ package com.warning.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.warning.dto.PageResult;
+import com.warning.dto.RouteWarningStatDTO;
 import com.warning.dto.WarningQueryDTO;
 import com.warning.dto.WarningStatisticsDTO;
+import com.warning.entity.GeoLineNode;
 import com.warning.entity.WarningInfo;
+import com.warning.mapper.GeoLineNodeMapper;
 import com.warning.mapper.WarningInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,9 +16,8 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -23,6 +25,9 @@ public class WarningQueryService {
 
     @Resource
     private WarningInfoMapper warningInfoMapper;
+
+    @Resource
+    private GeoLineNodeMapper geoLineNodeMapper;
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -193,5 +198,78 @@ public class WarningQueryService {
                 .orderByDesc("create_time");
 
         return warningInfoMapper.selectList(wrapper);
+    }
+
+    /**
+     * 统计每条线路的预警情况
+     * 逻辑：
+     *   1. 查询 geo_line_node，按 roadCode 分组，得到每条线路的节点集合
+     *   2. 查询 warning_info 全量（当前快照），以 stationCode（桩号）为 key 建立索引
+     *   3. 遍历每条线路的节点，统计各级别预警节点数
+     *   4. 计算最高风险级别（RED > ORANGE > YELLOW）
+     */
+    public List<RouteWarningStatDTO> getRouteWarningStatistics() {
+        // 1. 查所有节点，按 roadCode 分组
+        List<GeoLineNode> allNodes = geoLineNodeMapper.selectList(null);
+        Map<String, List<GeoLineNode>> nodesByRoad = allNodes.stream()
+                .filter(n -> StringUtils.hasText(n.getRoadCode()))
+                .collect(Collectors.groupingBy(GeoLineNode::getRoadCode));
+
+        // 2. 查所有预警，以 stationCode（桩号）为 key，取最高级别
+        //    同一桩号可能有多种预警类型，这里取级别最高的那条
+        List<WarningInfo> allWarnings = warningInfoMapper.selectList(null);
+        // stationCode -> 最高 warningLevel
+        Map<String, String> maxLevelByStation = new HashMap<>();
+        for (WarningInfo w : allWarnings) {
+            if (!StringUtils.hasText(w.getStationCode())) continue;
+            String existing = maxLevelByStation.get(w.getStationCode());
+            if (existing == null || levelRank(w.getWarningLevel()) > levelRank(existing)) {
+                maxLevelByStation.put(w.getStationCode(), w.getWarningLevel());
+            }
+        }
+
+        // 3. 按线路统计
+        List<RouteWarningStatDTO> result = new ArrayList<>();
+        for (Map.Entry<String, List<GeoLineNode>> entry : nodesByRoad.entrySet()) {
+            String roadCode = entry.getKey();
+            List<GeoLineNode> nodes = entry.getValue();
+
+            RouteWarningStatDTO stat = new RouteWarningStatDTO();
+            stat.setRoadCode(roadCode);
+            // 取第一个节点的 roadName
+            stat.setRoadName(nodes.get(0).getRoadName());
+            stat.setTotalNodes(nodes.size());
+
+            Map<String, Integer> levelCount = new HashMap<>();
+            int warningNodes = 0;
+            String maxLevel = null;
+
+            for (GeoLineNode node : nodes) {
+                String level = maxLevelByStation.get(node.getName());
+                if (level == null) continue;
+                warningNodes++;
+                levelCount.merge(level, 1, Integer::sum);
+                if (maxLevel == null || levelRank(level) > levelRank(maxLevel)) {
+                    maxLevel = level;
+                }
+            }
+
+            stat.setLevelCount(levelCount);
+            stat.setWarningNodes(warningNodes);
+            stat.setMaxLevel(maxLevel);
+            result.add(stat);
+        }
+
+        // 按最高风险级别降序排列
+        result.sort((a, b) -> levelRank(b.getMaxLevel()) - levelRank(a.getMaxLevel()));
+        return result;
+    }
+
+    /** 级别排名：RED=3, ORANGE=2, YELLOW=1, null/其他=0 */
+    private int levelRank(String level) {
+        if ("RED".equals(level)) return 3;
+        if ("ORANGE".equals(level)) return 2;
+        if ("YELLOW".equals(level)) return 1;
+        return 0;
     }
 }
