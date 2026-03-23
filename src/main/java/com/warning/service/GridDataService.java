@@ -50,18 +50,16 @@ public class GridDataService {
 
         try {
             String url = String.format("%s?element=%s", timeListUrl, element);
-            log.info("查询数据最新时间: element={}, url={}", element, url);
-
             TimeListResponse response = restTemplate.getForObject(url, TimeListResponse.class);
 
             if (response == null || response.getReturnCode() == null || response.getReturnCode() != 0) {
-                log.error("时间列表接口返回异常: element={}, response={}", element, response);
+                log.error("时间列表接口异常: element={}, response={}", element, response);
                 return null;
             }
 
             List<String> ds = response.getDs();
             if (ds == null || ds.isEmpty()) {
-                log.warn("时间列表为空: element={}", element);
+                log.error("时间列表为空: element={}", element);
                 return null;
             }
 
@@ -70,7 +68,6 @@ public class GridDataService {
             LocalDateTime latestTime = LocalDateTime.parse(latestTimeStr, INPUT_FORMATTER);
             String formattedTime = latestTime.format(OUTPUT_FORMATTER);
 
-            log.info("获取到数据最新时间: element={}, time={}", element, formattedTime);
             latestTimeCache.put(element, formattedTime);
             return formattedTime;
 
@@ -88,7 +85,6 @@ public class GridDataService {
     public GridDataSet getGridData(String element) {
         String latestTime = fetchLatestTime(element);
         if (latestTime == null) {
-            log.warn("无法获取最新时间，跳过网格数据请求: element={}", element);
             return null;
         }
         return getGridData(element, latestTime);
@@ -111,28 +107,26 @@ public class GridDataService {
             String url = String.format("%s?elements=%s&times=%s&apikey=%s",
                     baseUrl, element, time, apiKey);
 
-            log.info("请求网格数据接口: element={}, time={}", element, time);
-
             GridDataResponse response = restTemplate.getForObject(url, GridDataResponse.class);
 
             if (response == null || response.getReturnCode() != 0) {
-                log.error("网格数据接口返回异常: {}", response);
+                log.error("网格数据接口异常: element={}, code={}", element, response == null ? "null" : response.getReturnCode());
                 return null;
             }
 
             if (response.getDs() == null || response.getDs().isEmpty()) {
-                log.warn("网格数据为空: element={}, time={}", element, time);
+                log.error("网格数据为空: element={}, time={}", element, time);
                 return null;
             }
 
             GridDataSet gridData = response.getDs().get(0);
             dataCache.put(cacheKey, gridData);
-            log.info("成功获取网格数据: element={}, 网格数={}", element, gridData.getDataArray().size());
+            log.info("网格数据OK: element={}, time={}, 点数={}", element, time, gridData.getDataArray().size());
 
             return gridData;
 
         } catch (Exception e) {
-            log.error("获取网格数据失败: element={}, time={}", element, time, e);
+            log.error("获取网格数据失败: element={}", element, e);
             return null;
         }
     }
@@ -143,6 +137,5 @@ public class GridDataService {
     public void clearCache() {
         dataCache.clear();
         latestTimeCache.clear();
-        log.info("网格数据缓存已清空");
     }
 }

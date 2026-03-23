@@ -5,9 +5,11 @@ import com.warning.dto.RouteWarningStatDTO;
 import com.warning.dto.WarningQueryDTO;
 import com.warning.dto.WarningStatisticsDTO;
 import com.warning.entity.WarningInfo;
+import com.warning.entity.WarningThreshold;
 import com.warning.service.ExcelImportService;
 import com.warning.service.WarningQueryService;
 import com.warning.service.WarningScheduleService;
+import com.warning.service.WarningThresholdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,9 @@ public class WarningController {
 
     @Resource
     private WarningQueryService warningQueryService;
+
+    @Resource
+    private WarningThresholdService warningThresholdService;
 
     /**
      * 分页查询预警信息
@@ -208,6 +213,45 @@ public class WarningController {
             log.error("统计线路预警失败", e);
             result.put("success", false);
             result.put("message", "统计失败: " + e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 查询预警阈值列表（支持按 warningType、levelName 过滤）
+     */
+    @GetMapping("/threshold/list")
+    public Map<String, Object> listThresholds(
+            @RequestParam(required = false) String warningType,
+            @RequestParam(required = false) String levelName) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            List<WarningThreshold> data = warningThresholdService.listThresholds(warningType, levelName);
+            result.put("success", true);
+            result.put("data", data);
+            result.put("total", data.size());
+        } catch (Exception e) {
+            log.error("查询预警阈值失败", e);
+            result.put("success", false);
+            result.put("message", "查询失败: " + e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * 根据ID灵活更新预警阈值（只更新传入的非null字段）
+     */
+    @PutMapping("/threshold/update")
+    public Map<String, Object> updateThreshold(@RequestBody WarningThreshold threshold) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            boolean updated = warningThresholdService.updateThreshold(threshold);
+            result.put("success", updated);
+            result.put("message", updated ? "更新成功" : "记录不存在或无可更新字段");
+        } catch (Exception e) {
+            log.error("更新预警阈值失败", e);
+            result.put("success", false);
+            result.put("message", "更新失败: " + e.getMessage());
         }
         return result;
     }

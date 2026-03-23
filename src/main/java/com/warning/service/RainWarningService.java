@@ -48,7 +48,7 @@ public class RainWarningService {
             thresholds.put(threshold.getLevelName(), threshold.getThresholdValue());
         }
 
-        log.info("加载暴雨预警阈值: {}", thresholds);
+        log.debug("加载暴雨预警阈值: {}", thresholds);
     }
 
     /**

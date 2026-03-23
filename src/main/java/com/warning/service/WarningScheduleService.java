@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -35,38 +36,34 @@ public class WarningScheduleService {
     private GridDataService gridDataService;
 
     /**
-     * 每6分钟执行一次预警更新任务
+     * 每10分钟执行一次预警更新任务
      */
-    @Scheduled(cron = "0 */6 * * * ?")
+    @Scheduled(cron = "0 */10 * * * ?")
     public void updateWarnings() {
         long startTime = System.currentTimeMillis();
-        log.info("========== 开始执行预警更新任务 ==========");
 
         try {
-            // 1. 清空预警表
-            warningInfoMapper.delete(null);
-            log.info("已清空预警表");
-
-            // 2. 清空网格数据缓存
+            // 1. 清空网格数据缓存
             gridDataService.clearCache();
 
-            // 3. 获取所有路段节点
+            // 2. 获取所有路段节点
             List<GeoLineNode> nodes = geoLineNodeMapper.selectList(null);
-            log.info("共{}个路段节点需要检查", nodes.size());
 
             if (nodes.isEmpty()) {
                 log.warn("路段节点为空，请先导入Excel数据");
                 return;
             }
 
-            // 4. 遍历所有节点，检查预警（时间由 GridDataService 自动从接口获取）
+            // 3. 遍历所有节点，检查预警（时间由 GridDataService 自动从接口获取）
             List<WarningInfo> warnings = new ArrayList<>();
             int rainCount = 0, windCount = 0, visCount = 0;
+            Date now = new Date();
 
             for (GeoLineNode node : nodes) {
                 // 暴雨预警
                 WarningInfo rainWarning = rainWarningService.checkWarning(node);
                 if (rainWarning != null) {
+                    rainWarning.setCreateTime(now);
                     warnings.add(rainWarning);
                     rainCount++;
                 }
@@ -74,6 +71,7 @@ public class WarningScheduleService {
                 // 大风预警
                 WarningInfo windWarning = windWarningService.checkWarning(node);
                 if (windWarning != null) {
+                    windWarning.setCreateTime(now);
                     warnings.add(windWarning);
                     windCount++;
                 }
@@ -81,34 +79,28 @@ public class WarningScheduleService {
                 // 能见度预警
                 WarningInfo visWarning = visibilityWarningService.checkWarning(node);
                 if (visWarning != null) {
+                    visWarning.setCreateTime(now);
                     warnings.add(visWarning);
                     visCount++;
                 }
             }
 
-            // 5. 批量插入预警信息
+            // 4. 批量插入预警信息（保留历史记录）
             if (!warnings.isEmpty()) {
                 for (WarningInfo warning : warnings) {
                     warningInfoMapper.insert(warning);
                 }
-                log.info("成功插入{}条预警信息", warnings.size());
-            } else {
-                log.info("本次未产生预警信息");
             }
 
             long endTime = System.currentTimeMillis();
-            log.info("========== 预警更新任务完成 ==========");
-            log.info("统计信息: 检查节点数={}, 暴雨预警={}, 大风预警={}, 能见度预警={}, 总预警数={}, 耗时={}ms",
+            log.info("预警更新完成: 节点={}, 雨={}, 风={}, 能见度={}, 总计={}, 耗时={}ms",
                     nodes.size(), rainCount, windCount, visCount, warnings.size(), (endTime - startTime));
 
         } catch (Exception e) {
-            log.error("预警更新任务执行失败", e);
+            log.error("预警更新任务失败", e);
         }
     }
 
-    /**
-     * 手动触发预警更新（用于测试）
-     */
     public void manualUpdate() {
         log.info("手动触发预警更新");
         updateWarnings();

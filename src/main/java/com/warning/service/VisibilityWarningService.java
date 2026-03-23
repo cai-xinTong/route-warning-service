@@ -44,7 +44,7 @@ public class VisibilityWarningService {
             thresholds.put(threshold.getLevelName(), threshold.getThresholdValue());
         }
 
-        log.info("加载能见度预警阈值: {}", thresholds);
+        log.debug("加载能见度预警阈值: {}", thresholds);
     }
 
     public WarningInfo checkWarning(GeoLineNode node) {

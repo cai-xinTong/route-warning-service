@@ -1,0 +1,111 @@
+Index: .idea/encodings.xml
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+deleted file mode 100644
+--- a/.idea/encodings.xml	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
++++ /dev/null	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="Encoding">
+-    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+deleted file mode 100644
+--- a/.idea/jarRepositories.xml	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
++++ /dev/null	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RemoteRepositoriesConfiguration">
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Central Repository" />
+-      <option name="url" value="https://repo.maven.apache.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Maven Central repository" />
+-      <option name="url" value="https://repo1.maven.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="jboss.community" />
+-      <option name="name" value="JBoss Community repository" />
+-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+-    </remote-repository>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+deleted file mode 100644
+--- a/.idea/compiler.xml	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
++++ /dev/null	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
+@@ -1,26 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <annotationProcessing>
+-      <profile name="Maven default annotation processors profile" enabled="true">
+-        <sourceOutputDir name="target/generated-sources/annotations" />
+-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+-        <outputRelativeToContentRoot value="true" />
+-      </profile>
+-      <profile name="Annotation profile for route-warning-service" enabled="true">
+-        <sourceOutputDir name="target/generated-sources/annotations" />
+-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+-        <outputRelativeToContentRoot value="true" />
+-        <processorPath useClasspath="false">
+-          <entry name="$PROJECT_DIR$/../../../apache-maven-repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+-        </processorPath>
+-        <module name="route-warning-service" />
+-      </profile>
+-    </annotationProcessing>
+-  </component>
+-  <component name="JavacSettings">
+-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+-      <module name="route-warning-service" options="-parameters" />
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
++++ /dev/null	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
+@@ -1,8 +0,0 @@
+-# 默认忽略的文件
+-/shelf/
+-/workspace.xml
+-# 基于编辑器的 HTTP 客户端请求
+-/httpRequests/
+-# Datasource local storage ignored files
+-/dataSources/
+-/dataSources.local.xml
+Index: .idea/misc.xml
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+deleted file mode 100644
+--- a/.idea/misc.xml	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
++++ /dev/null	(revision 69b41ba7e246b17c35b0453ab488dd09fb2cb3b4)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="MavenProjectsManager">
+-    <option name="originalFiles">
+-      <list>
+-        <option value="$PROJECT_DIR$/pom.xml" />
+-      </list>
+-    </option>
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+-</project>
+\ No newline at end of file
