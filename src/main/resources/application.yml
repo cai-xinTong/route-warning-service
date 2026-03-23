@@ -23,7 +23,6 @@ mybatis-plus:
   type-aliases-package: com.warning.entity
   type-handlers-package: com.warning.typehandler
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
   global-config:
     db-config:
