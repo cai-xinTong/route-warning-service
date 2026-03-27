@@ -62,6 +62,8 @@ COMMENT ON COLUMN warning_threshold.update_time IS '更新时间';
 -- 3. 预警信息表
 CREATE TABLE warning_info (
     id BIGINT NOT NULL PRIMARY KEY,
+    sta_id BIGINT,
+    geo_id BIGINT,
     station_code VARCHAR(100),
     station_name VARCHAR(200),
     lon DOUBLE,
@@ -83,6 +85,8 @@ CREATE SEQUENCE seq_warning_info START WITH 1 INCREMENT BY 1;
 
 COMMENT ON TABLE warning_info IS '预警信息表';
 COMMENT ON COLUMN warning_info.id IS '主键ID';
+COMMENT ON COLUMN warning_info.sta_id IS '气象站ID（weather_service_geo_detail.staId）';
+COMMENT ON COLUMN warning_info.geo_id IS '地理区域ID（weather_service_geo_detail.geoId）';
 COMMENT ON COLUMN warning_info.station_code IS '站号/桩号';
 COMMENT ON COLUMN warning_info.station_name IS '站点名称';
 COMMENT ON COLUMN warning_info.lon IS '经度';

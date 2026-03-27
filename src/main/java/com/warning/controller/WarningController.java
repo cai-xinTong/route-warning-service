@@ -188,6 +188,25 @@ public class WarningController {
     }
 
     /**
+     * 根据预警方案ID查询对应的预警记录
+     */
+    @GetMapping("/warning/plan")
+    public Map<String, Object> getWarningsByPlanId(@RequestParam Long planId) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            List<WarningInfo> warnings = warningQueryService.queryWarningsByPlanId(planId);
+            result.put("success", true);
+            result.put("data", warnings);
+            result.put("total", warnings.size());
+        } catch (Exception e) {
+            log.error("按方案ID查询预警失败, planId={}", planId, e);
+            result.put("success", false);
+            result.put("message", "查询失败: " + e.getMessage());
+        }
+        return result;
+    }
+
+    /**
      * 健康检查
      */
     @GetMapping("/health")

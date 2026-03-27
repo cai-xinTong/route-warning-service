@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warning.mapper.WeatherServiceGeoDetailMapper">
+
+    <resultMap id="geoDetailMap" type="com.warning.entity.WeatherServiceGeoDetail">
+        <id column="staId" property="staId"/>
+        <result column="lon" property="lon"/>
+        <result column="lat" property="lat"/>
+        <result column="geoId" property="geoId"/>
+        <result column="stationName" property="stationName"/>
+        <result column="stationCode" property="stationCode"/>
+    </resultMap>
+
+    <select id="selectByGeoIds" resultMap="geoDetailMap">
+        SELECT staId, lon, lat, geoId, stationName, stationCode
+        FROM weather_service_geo_detail
+        WHERE geoId IN
+        <foreach collection="geoIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

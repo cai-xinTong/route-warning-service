@@ -18,6 +18,12 @@ public class GeoLineNode {
 
     private Long objectId;
 
+    @TableField(exist = false)
+    private Long staId;
+
+    @TableField(exist = false)
+    private Long geoId;
+
     private Integer seq;
 
     private String name;

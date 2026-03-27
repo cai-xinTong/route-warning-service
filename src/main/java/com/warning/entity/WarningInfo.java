@@ -16,6 +16,10 @@ public class WarningInfo {
     @TableId(type = IdType.INPUT)
     private Long id;
 
+    private Long staId;
+
+    private Long geoId;
+
     private String stationCode;
 
     private String stationName;

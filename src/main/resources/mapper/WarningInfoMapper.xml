@@ -7,12 +7,21 @@
             SELECT seq_warning_info.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO warning_info (
-            id, station_code, station_name, lon, lat, warning_type, warning_level,
+            id, sta_id, geo_id, station_code, station_name, lon, lat, warning_type, warning_level,
             actual_value, forecast_value, forecast_time, forecast_period, create_time
         ) VALUES (
-            #{id}, #{stationCode}, #{stationName}, #{lon}, #{lat}, #{warningType}, #{warningLevel},
+            #{id}, #{staId}, #{geoId}, #{stationCode}, #{stationName}, #{lon}, #{lat}, #{warningType}, #{warningLevel},
             #{actualValue}, #{forecastValue}, #{forecastTime}, #{forecastPeriod}, #{createTime}
         )
     </insert>
+
+    <select id="selectByGeoIds" resultType="com.warning.entity.WarningInfo">
+        SELECT * FROM warning_info
+        WHERE geo_id IN
+        <foreach collection="geoIds" item="geoId" open="(" separator="," close=")">
+            #{geoId}
+        </foreach>
+        ORDER BY create_time DESC
+    </select>
 
 </mapper>

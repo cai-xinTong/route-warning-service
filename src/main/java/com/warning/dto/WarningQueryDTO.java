@@ -11,6 +11,11 @@ import java.util.Date;
 public class WarningQueryDTO {
 
     /**
+     * 气象站ID（weather_service_geo_detail.staId）
+     */
+    private Long staId;
+
+    /**
      * 预警类型：RAIN/WIND/VISIBILITY
      */
     private String warningType;

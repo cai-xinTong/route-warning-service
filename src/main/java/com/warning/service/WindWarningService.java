@@ -10,7 +10,6 @@ import com.warning.util.GridCalculator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,47 +26,38 @@ public class WindWarningService {
     @Resource
     private WarningThresholdMapper thresholdMapper;
 
-    private final Map<String, Double> thresholds = new HashMap<>();
-
-    @PostConstruct
-    public void init() {
-        loadThresholds();
-    }
-
-    public void loadThresholds() {
+    private Map<String, Double> loadThresholds() {
         QueryWrapper<WarningThreshold> wrapper = new QueryWrapper<>();
         wrapper.eq("warning_type", "WIND");
         List<WarningThreshold> list = thresholdMapper.selectList(wrapper);
-
-        thresholds.clear();
-        for (WarningThreshold threshold : list) {
-            thresholds.put(threshold.getLevelName(), threshold.getThresholdValue());
+        Map<String, Double> thresholds = new HashMap<>();
+        for (WarningThreshold t : list) {
+            thresholds.put(t.getLevelName(), t.getThresholdValue());
         }
-
-        log.debug("加载大风预警阈值: {}", thresholds);
+        log.debug("大风阈值: {}", thresholds);
+        return thresholds;
     }
 
     public WarningInfo checkWarning(GeoLineNode node) {
+        Map<String, Double> thresholds = loadThresholds();
         try {
-            // 获取实况风速（过去1小时）
             GridDataSet actualGrid = gridDataService.getGridData("HOR-WIN");
             Double actualValue = null;
             if (actualGrid != null) {
                 actualValue = GridCalculator.getGridValueByLonLat(node.getLon(), node.getLat(), actualGrid);
             }
 
-            // 获取预报风速（未来3h）
             GridDataSet forecastGrid = gridDataService.getGridData("EDA10");
             Double forecastValue = null;
             if (forecastGrid != null) {
                 forecastValue = GridCalculator.getGridValueByLonLat(node.getLon(), node.getLat(), forecastGrid);
             }
 
-            // 判断预警等级
-            String level = determineLevel(actualValue, forecastValue);
-
+            String level = determineLevel(actualValue, forecastValue, thresholds);
             if (level != null) {
                 WarningInfo warning = new WarningInfo();
+                warning.setStaId(node.getStaId());
+                warning.setGeoId(node.getGeoId());
                 warning.setStationCode(node.getName());
                 warning.setStationName(node.getRoadName());
                 warning.setLon(node.getLon());
@@ -78,34 +68,27 @@ public class WindWarningService {
                 warning.setForecastValue(forecastValue);
                 warning.setForecastTime(new Date());
                 warning.setForecastPeriod(3);
-
                 return warning;
             }
 
         } catch (Exception e) {
             log.error("检查大风预警失败: node={}", node.getName(), e);
         }
-
         return null;
     }
 
-    private String determineLevel(Double actualValue, Double forecastValue) {
-        Double redThreshold = thresholds.get("RED");
-        Double orangeThreshold = thresholds.get("ORANGE");
-        Double yellowThreshold = thresholds.get("YELLOW");
+    private String determineLevel(Double actualValue, Double forecastValue, Map<String, Double> thresholds) {
+        Double red = thresholds.get("RED");
+        Double orange = thresholds.get("ORANGE");
+        Double yellow = thresholds.get("YELLOW");
 
-        if (exceedsThreshold(actualValue, redThreshold) || exceedsThreshold(forecastValue, redThreshold)) {
-            return "RED";
-        } else if (exceedsThreshold(actualValue, orangeThreshold) || exceedsThreshold(forecastValue, orangeThreshold)) {
-            return "ORANGE";
-        } else if (exceedsThreshold(actualValue, yellowThreshold) || exceedsThreshold(forecastValue, yellowThreshold)) {
-            return "YELLOW";
-        }
-
+        if (exceeds(actualValue, red) || exceeds(forecastValue, red)) return "RED";
+        if (exceeds(actualValue, orange) || exceeds(forecastValue, orange)) return "ORANGE";
+        if (exceeds(actualValue, yellow) || exceeds(forecastValue, yellow)) return "YELLOW";
         return null;
     }
 
-    private boolean exceedsThreshold(Double value, Double threshold) {
+    private boolean exceeds(Double value, Double threshold) {
         return value != null && threshold != null && value > threshold;
     }
 }

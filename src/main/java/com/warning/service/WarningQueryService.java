@@ -8,8 +8,10 @@ import com.warning.dto.WarningQueryDTO;
 import com.warning.dto.WarningStatisticsDTO;
 import com.warning.entity.GeoLineNode;
 import com.warning.entity.WarningInfo;
+import com.warning.entity.WeatherServicePlan;
 import com.warning.mapper.GeoLineNodeMapper;
 import com.warning.mapper.WarningInfoMapper;
+import com.warning.mapper.WeatherServicePlanMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -29,6 +31,9 @@ public class WarningQueryService {
     @Resource
     private GeoLineNodeMapper geoLineNodeMapper;
 
+    @Resource
+    private WeatherServicePlanMapper weatherServicePlanMapper;
+
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
@@ -36,6 +41,11 @@ public class WarningQueryService {
      */
     public PageResult<WarningInfo> queryWarnings(WarningQueryDTO query) {
         QueryWrapper<WarningInfo> wrapper = new QueryWrapper<>();
+
+        // 气象站ID
+        if (query.getStaId() != null) {
+            wrapper.eq("sta_id", query.getStaId());
+        }
 
         // 预警类型
         if (StringUtils.hasText(query.getWarningType())) {
@@ -263,6 +273,23 @@ public class WarningQueryService {
         // 按最高风险级别降序排列
         result.sort((a, b) -> levelRank(b.getMaxLevel()) - levelRank(a.getMaxLevel()));
         return result;
+    }
+
+    /**
+     * 根据预警方案ID查询对应的预警记录
+     * 逻辑：从 plan 表取出 GeoIds → 按 geoId 查 warning_info
+     */
+    public List<WarningInfo> queryWarningsByPlanId(Long planId) {
+        WeatherServicePlan plan = weatherServicePlanMapper.selectById(planId);
+        if (plan == null || plan.getGeoIds() == null || plan.getGeoIds().trim().isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<Long> geoIds = Arrays.stream(plan.getGeoIds().split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .map(Long::parseLong)
+                .collect(Collectors.toList());
+        return warningInfoMapper.selectByGeoIds(geoIds);
     }
 
     /** 级别排名：RED=3, ORANGE=2, YELLOW=1, null/其他=0 */
