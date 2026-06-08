@@ -2,25 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.warning.mapper.WarningInfoMapper">
 
+    <resultMap id="warningInfoMap" type="com.warning.entity.WarningInfo">
+        <id column="ID" property="id"/>
+        <result column="PLAN_ID" property="planId"/>
+        <result column="STA_ID" property="staId"/>
+        <result column="GEO_ID" property="geoId"/>
+        <result column="STATION_CODE" property="stationCode"/>
+        <result column="STATION_NAME" property="stationName"/>
+        <result column="LON" property="lon"/>
+        <result column="LAT" property="lat"/>
+        <result column="WARNING_TYPE" property="warningType"/>
+        <result column="WARNING_LEVEL" property="warningLevel"/>
+        <result column="ACTUAL_VALUE" property="actualValue"/>
+        <result column="FORECAST_VALUE" property="forecastValue"/>
+        <result column="FORECAST_3H_VALUE" property="forecast3hValue"/>
+        <result column="FORECAST_TIME" property="forecastTime"/>
+        <result column="FORECAST_PERIOD" property="forecastPeriod"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+
     <insert id="insert" parameterType="com.warning.entity.WarningInfo">
         <selectKey keyProperty="id" resultType="long" order="BEFORE">
             SELECT seq_warning_info.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO warning_info (
-            id, sta_id, geo_id, station_code, station_name, lon, lat, warning_type, warning_level,
-            actual_value, forecast_value, forecast_time, forecast_period, create_time
+            id, plan_id, sta_id, geo_id, station_code, station_name, lon, lat, warning_type, warning_level,
+            actual_value, forecast_value, forecast_3h_value, forecast_time, forecast_period, create_time, status
         ) VALUES (
-            #{id}, #{staId}, #{geoId}, #{stationCode}, #{stationName}, #{lon}, #{lat}, #{warningType}, #{warningLevel},
-            #{actualValue}, #{forecastValue}, #{forecastTime}, #{forecastPeriod}, #{createTime}
+            #{id}, #{planId}, #{staId}, #{geoId}, #{stationCode}, #{stationName}, #{lon}, #{lat}, #{warningType}, #{warningLevel},
+            #{actualValue}, #{forecastValue}, #{forecast3hValue}, #{forecastTime}, #{forecastPeriod}, #{createTime}, #{status}
         )
     </insert>
 
-    <select id="selectByGeoIds" resultType="com.warning.entity.WarningInfo">
+    <!-- 查询指定 planId 下最近一批 create_time -->
+    <select id="selectLatestBatchTime" resultType="java.util.Date">
+        SELECT MAX(create_time) FROM warning_info
+        WHERE plan_id = #{planId}
+        <if test="pointTime != null">
+            AND create_time &gt;= #{pointTime}
+            AND create_time &lt; #{endTime}
+        </if>
+    </select>
+
+    <!-- 按 planId 查询预警记录 -->
+    <select id="selectByPlanId" resultMap="warningInfoMap">
         SELECT * FROM warning_info
-        WHERE geo_id IN
-        <foreach collection="geoIds" item="geoId" open="(" separator="," close=")">
-            #{geoId}
-        </foreach>
+        WHERE plan_id = #{planId}
+        <choose>
+            <!-- 时间点模式：精确匹配批次时间 -->
+            <when test="batchTime != null">
+                AND create_time = #{batchTime}
+            </when>
+            <!-- 时间范围模式 -->
+            <otherwise>
+                <if test="startTime != null">
+                    AND create_time &gt;= #{startTime}
+                </if>
+                <if test="endTime != null">
+                    AND create_time &lt;= #{endTime}
+                </if>
+            </otherwise>
+        </choose>
         ORDER BY create_time DESC
     </select>
 

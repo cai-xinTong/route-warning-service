@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warning.mapper.WeatherServiceGeoMapper">
+
+    <select id="selectGeoIdsByUpPlanIds" resultType="java.lang.Long">
+        SELECT id
+        FROM weather_service_geo
+        WHERE upPlanId IN
+        <foreach collection="upPlanIds" item="upPlanId" open="(" separator="," close=")">
+            #{upPlanId}
+        </foreach>
+    </select>
+
+</mapper>

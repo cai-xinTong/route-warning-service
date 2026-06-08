@@ -14,15 +14,21 @@ public class GridCalculator {
             return -1;
         }
 
-        // 计算在网格中的列索引（经度方向）
+        // 计算在网格中的列索引（经度方向，西→东）
         int colIndex = (int) Math.round((lon - grid.getMinLon()) / grid.getLonGridSpace());
-        // 计算在网格中的行索引（纬度方向）
-        int rowIndex = (int) Math.round((lat - grid.getMinLat()) / grid.getLatGridSpace());
+        // 计算在网格中的行索引（纬度方向）。
+        // 注意：网格数据排列是北→南（row 0 = 最大纬度），而 minLat 是最小纬度，
+        // 因此需要用 (总行数-1) 减去原始索引来翻转。
+        int rawRowIndex = (int) Math.round((lat - grid.getMinLat()) / grid.getLatGridSpace());
+        int rowIndex = grid.getLatGridNumber() - 1 - rawRowIndex;
 
         // 边界检查
         if (colIndex < 0 || colIndex >= grid.getLonGridNumber() ||
             rowIndex < 0 || rowIndex >= grid.getLatGridNumber()) {
-            log.debug("经纬度({}, {})超出网格范围", lon, lat);
+            log.info("站点经纬度({}, {})超出网格范围 [lon={}-{}, lat={}-{}]",
+                    lon, lat,
+                    grid.getMinLon(), grid.getMaxLon(),
+                    grid.getMinLat(), grid.getMaxLat());
             return -1;
         }
 

@@ -19,8 +19,8 @@ public class WeatherServicePlan {
     @TableField("elements")
     private String elements;
 
-    @TableField("GeoIds")
-    private String geoIds;
+    @TableField("upPlanId")
+    private String upPlanId;
 
     @TableField("status")
     private String status;

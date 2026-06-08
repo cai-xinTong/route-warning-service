@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67696021-5576-42c1-b8b1-91f5ade73651" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API文档.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/ideaProjectNew/xianLuYUjing/route-warning-service" value="3B6MaNlQP3ApvuMOiz0lgIMDbmb" />
+    </persistenceIdMap>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,41 +54,44 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.route-warning-service [clean].executor": "Run",
-    "Maven.route-warning-service [package].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "Spring Boot.RouteWarningApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "go.import.settings.migrated": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/ideaProjectNew/xianLuYUjing/route-warning-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ApiPost:METDOD_SEND_RECORD:route-warning-service&quot;: &quot;{\&quot;/api/warning/plan\&quot;:[{\&quot;url\&quot;:\&quot;http://localhost:9717/api/warning/plan\&quot;,\&quot;header\&quot;:[],\&quot;query\&quot;:[{\&quot;key\&quot;:\&quot;planId\&quot;,\&quot;value\&quot;:\&quot;201\&quot;,\&quot;type\&quot;:\&quot;Text\&quot;,\&quot;description\&quot;:\&quot;\&quot;,\&quot;is_checked\&quot;:1.0,\&quot;not_null\&quot;:\&quot;1\&quot;,\&quot;field_type\&quot;:\&quot;Integer\&quot;}],\&quot;rest\&quot;:[],\&quot;cookie\&quot;:[],\&quot;body\&quot;:{\&quot;mode\&quot;:\&quot;none\&quot;,\&quot;parameter\&quot;:[],\&quot;raw\&quot;:\&quot;\&quot;,\&quot;raw_para\&quot;:[]},\&quot;responseBody\&quot;:\&quot;Fail to send:http://localhost:9717/api/warning/plan?planId\\u003d201\\n\\nConnectException: Connection refused: connect\&quot;,\&quot;responseHeader\&quot;:{},\&quot;responseCookieList\&quot;:[],\&quot;selectedItem\&quot;:\&quot;GET\&quot;,\&quot;time\&quot;:{\&quot;date\&quot;:{\&quot;year\&quot;:2026.0,\&quot;month\&quot;:3.0,\&quot;day\&quot;:27.0},\&quot;time\&quot;:{\&quot;hour\&quot;:9.0,\&quot;minute\&quot;:53.0,\&quot;second\&quot;:19.0,\&quot;nano\&quot;:1.123684E8}}},{\&quot;url\&quot;:\&quot;http://localhost:9717/api/warning/plan\&quot;,\&quot;header\&quot;:[],\&quot;query\&quot;:[{\&quot;key\&quot;:\&quot;planId\&quot;,\&quot;value\&quot;:\&quot;201\&quot;,\&quot;type\&quot;:\&quot;Text\&quot;,\&quot;description\&quot;:\&quot;\&quot;,\&quot;is_checked\&quot;:1,\&quot;not_null\&quot;:\&quot;1\&quot;,\&quot;field_type\&quot;:\&quot;Integer\&quot;}],\&quot;rest\&quot;:[],\&quot;cookie\&quot;:[],\&quot;body\&quot;:{\&quot;mode\&quot;:\&quot;none\&quot;,\&quot;parameter\&quot;:[],\&quot;raw\&quot;:\&quot;\&quot;,\&quot;raw_para\&quot;:[]},\&quot;responseBody\&quot;:\&quot;{\\\&quot;total\\\&quot;:22,\\\&quot;data\\\&quot;:[{\\\&quot;id\\\&quot;:18892,\\\&quot;staId\\\&quot;:238,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖40-50km\\\&quot;,\\\&quot;lon\\\&quot;:108.91773812322732,\\\&quot;lat\\\&quot;:24.755686433725376,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.971746,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.632+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18893,\\\&quot;staId\\\&quot;:239,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖50-60km\\\&quot;,\\\&quot;lon\\\&quot;:108.82222159823836,\\\&quot;lat\\\&quot;:24.753008672865167,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.0229683,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.638+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18891,\\\&quot;staId\\\&quot;:237,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖30-40km\\\&quot;,\\\&quot;lon\\\&quot;:109.00132280774133,\\\&quot;lat\\\&quot;:24.79474762912438,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.910565,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.626+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18889,\\\&quot;staId\\\&quot;:235,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖10-20km\\\&quot;,\\\&quot;lon\\\&quot;:109.1364574906987,\\\&quot;lat\\\&quot;:24.914295471530227,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.2297008,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.614+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18890,\\\&quot;staId\\\&quot;:236,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖20-30km\\\&quot;,\\\&quot;lon\\\&quot;:109.06194398676449,\\\&quot;lat\\\&quot;:24.859837539322875,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.9427638,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.620+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18897,\\\&quot;staId\\\&quot;:243,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖90-100km\\\&quot;,\\\&quot;lon\\\&quot;:108.46553361541996,\\\&quot;lat\\\&quot;:24.662728044024185,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.4226294,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.663+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18898,\\\&quot;staId\\\&quot;:244,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖100-106km\\\&quot;,\\\&quot;lon\\\&quot;:108.40439160146933,\\\&quot;lat\\\&quot;:24.63354727146161,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.210611,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.668+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18896,\\\&quot;staId\\\&quot;:242,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖80-90km\\\&quot;,\\\&quot;lon\\\&quot;:108.55013907688524,\\\&quot;lat\\\&quot;:24.68868408572575,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.4647493,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.658+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18894,\\\&quot;staId\\\&quot;:240,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖60-70km\\\&quot;,\\\&quot;lon\\\&quot;:108.73022513048144,\\\&quot;lat\\\&quot;:24.72877639033794,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.1391642,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.645+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18895,\\\&quot;staId\\\&quot;:241,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖70-80km\\\&quot;,\\\&quot;lon\\\&quot;:108.63565764317843,\\\&quot;lat\\\&quot;:24.726703626939347,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.1845305,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.650+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18888,\\\&quot;staId\\\&quot;:234,\\\&quot;geoId\\\&quot;:121,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖0-10km\\\&quot;,\\\&quot;lon\\\&quot;:109.23478410530154,\\\&quot;lat\\\&quot;:24.917405490522864,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.3180695,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.608+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18881,\\\&quot;staId\\\&quot;:205,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖40-50km\\\&quot;,\\\&quot;lon\\\&quot;:108.91773812322732,\\\&quot;lat\\\&quot;:24.755686433725376,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.971746,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.565+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18882,\\\&quot;staId\\\&quot;:206,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖50-60km\\\&quot;,\\\&quot;lon\\\&quot;:108.82222159823836,\\\&quot;lat\\\&quot;:24.753008672865167,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.0229683,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.570+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18880,\\\&quot;staId\\\&quot;:204,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖30-40km\\\&quot;,\\\&quot;lon\\\&quot;:109.00132280774133,\\\&quot;lat\\\&quot;:24.79474762912438,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.910565,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.558+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18878,\\\&quot;staId\\\&quot;:202,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖10-20km\\\&quot;,\\\&quot;lon\\\&quot;:109.1364574906987,\\\&quot;lat\\\&quot;:24.914295471530227,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.2297008,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.542+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18879,\\\&quot;staId\\\&quot;:203,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖20-30km\\\&quot;,\\\&quot;lon\\\&quot;:109.06194398676449,\\\&quot;lat\\\&quot;:24.859837539322875,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:1.9427638,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.550+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18886,\\\&quot;staId\\\&quot;:210,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖90-100km\\\&quot;,\\\&quot;lon\\\&quot;:108.46553361541996,\\\&quot;lat\\\&quot;:24.662728044024185,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.4226294,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.594+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18887,\\\&quot;staId\\\&quot;:211,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖100-106km\\\&quot;,\\\&quot;lon\\\&quot;:108.40439160146933,\\\&quot;lat\\\&quot;:24.63354727146161,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.210611,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.600+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18885,\\\&quot;staId\\\&quot;:209,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖80-90km\\\&quot;,\\\&quot;lon\\\&quot;:108.55013907688524,\\\&quot;lat\\\&quot;:24.68868408572575,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.4647493,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.589+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18883,\\\&quot;staId\\\&quot;:207,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖60-70km\\\&quot;,\\\&quot;lon\\\&quot;:108.73022513048144,\\\&quot;lat\\\&quot;:24.72877639033794,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.1391642,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.577+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18884,\\\&quot;staId\\\&quot;:208,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖70-80km\\\&quot;,\\\&quot;lon\\\&quot;:108.63565764317843,\\\&quot;lat\\\&quot;:24.726703626939347,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.1845305,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.583+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;},{\\\&quot;id\\\&quot;:18877,\\\&quot;staId\\\&quot;:201,\\\&quot;geoId\\\&quot;:118,\\\&quot;stationCode\\\&quot;:null,\\\&quot;stationName\\\&quot;:\\\&quot;S22桂河高速(融河路)-罗城管辖0-10km\\\&quot;,\\\&quot;lon\\\&quot;:109.23478410530154,\\\&quot;lat\\\&quot;:24.917405490522864,\\\&quot;warningType\\\&quot;:\\\&quot;WIND\\\&quot;,\\\&quot;warningLevel\\\&quot;:\\\&quot;YELLOW\\\&quot;,\\\&quot;actualValue\\\&quot;:2.3180695,\\\&quot;forecastValue\\\&quot;:null,\\\&quot;forecastTime\\\&quot;:\\\&quot;2026-03-27T01:52:16.534+00:00\\\&quot;,\\\&quot;forecastPeriod\\\&quot;:3,\\\&quot;createTime\\\&quot;:\\\&quot;2026-03-27T01:52:14.974+00:00\\\&quot;}],\\\&quot;success\\\&quot;:true}\&quot;,\&quot;responseHeader\&quot;:{\&quot;null\&quot;:[\&quot;HTTP/1.1 200\&quot;],\&quot;Transfer-Encoding\&quot;:[\&quot;chunked\&quot;],\&quot;Keep-Alive\&quot;:[\&quot;timeout\\u003d60\&quot;],\&quot;Connection\&quot;:[\&quot;keep-alive\&quot;],\&quot;Vary\&quot;:[\&quot;Origin\&quot;,\&quot;Access-Control-Request-Method\&quot;,\&quot;Access-Control-Request-Headers\&quot;],\&quot;Date\&quot;:[\&quot;Fri, 27 Mar 2026 01:53:31 GMT\&quot;],\&quot;Content-Type\&quot;:[\&quot;application/json\&quot;]},\&quot;responseCookieList\&quot;:[],\&quot;selectedItem\&quot;:\&quot;GET\&quot;,\&quot;time\&quot;:{\&quot;date\&quot;:{\&quot;year\&quot;:2026,\&quot;month\&quot;:3,\&quot;day\&quot;:27},\&quot;time\&quot;:{\&quot;hour\&quot;:9,\&quot;minute\&quot;:53,\&quot;second\&quot;:31,\&quot;nano\&quot;:775005600}}}]}&quot;,
+    &quot;Maven.route-warning-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.route-warning-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.route-warning-service [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.RouteWarningApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ideaProjectNew/xianLuYUjing/route-warning-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="RouteWarningApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="route-warning-service" />
@@ -122,7 +128,27 @@
       <workItem from="1774429764132" duration="781000" />
       <workItem from="1774490813881" duration="5895000" />
       <workItem from="1774507030262" duration="599000" />
-      <workItem from="1774575081266" duration="1293000" />
+      <workItem from="1774575081266" duration="4532000" />
+      <workItem from="1774583005176" duration="4865000" />
+      <workItem from="1774836682262" duration="16271000" />
+      <workItem from="1774926625602" duration="2387000" />
+      <workItem from="1774950211434" duration="9514000" />
+      <workItem from="1775012892889" duration="827000" />
+      <workItem from="1775014568688" duration="2749000" />
+      <workItem from="1775025788099" duration="681000" />
+      <workItem from="1775027404318" duration="2568000" />
+      <workItem from="1775702108893" duration="2134000" />
+      <workItem from="1775783616381" duration="1878000" />
+      <workItem from="1776043271317" duration="809000" />
+      <workItem from="1779444533351" duration="4736000" />
+      <workItem from="1780306443212" duration="3642000" />
+      <workItem from="1780468306400" duration="3290000" />
+      <workItem from="1780538157727" duration="14352000" />
+      <workItem from="1780626438517" duration="13504000" />
+      <workItem from="1780645384157" duration="11744000" />
+      <workItem from="1780838575878" duration="1589000" />
+      <workItem from="1780904306869" duration="108000" />
+      <workItem from="1780907415170" duration="1474000" />
     </task>
     <task id="LOCAL-00001" summary="线路预警init">
       <option name="closed" value="true" />
@@ -156,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774260221138</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="根据plan表查预警">
+      <option name="closed" value="true" />
+      <created>1774576496087</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774576496087</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,10 +201,19 @@
     <MESSAGE value="新增阈值表的查询和更新接口" />
     <MESSAGE value="新增阈值表的查询和更新接口，修改预警入库逻辑" />
     <MESSAGE value="新增阈值表的查询和更新接口，修改预警入库逻辑2" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增阈值表的查询和更新接口，修改预警入库逻辑2" />
+    <MESSAGE value="根据plan表查预警" />
+    <option name="LAST_COMMIT_MESSAGE" value="根据plan表查预警" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

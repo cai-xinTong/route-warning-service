@@ -16,6 +16,9 @@ public class WarningInfo {
     @TableId(type = IdType.INPUT)
     private Long id;
 
+    /** 所属预警方案ID */
+    private Long planId;
+
     private Long staId;
 
     private Long geoId;
@@ -36,6 +39,9 @@ public class WarningInfo {
 
     private Double forecastValue;
 
+    /** 未来3h预报累计值（降雨规则2专用） */
+    private Double forecast3hValue;
+
     @TableField(typeHandler = XuguDateTypeHandler.class)
     private Date forecastTime;
 
@@ -43,4 +49,9 @@ public class WarningInfo {
 
     @TableField(typeHandler = XuguDateTypeHandler.class)
     private Date createTime;
+
+    /**
+     * 预警状态：1-有预警
+     */
+    private Integer status;
 }

@@ -4,8 +4,10 @@ import com.warning.dto.PageResult;
 import com.warning.dto.RouteWarningStatDTO;
 import com.warning.dto.WarningQueryDTO;
 import com.warning.dto.WarningStatisticsDTO;
+import com.warning.dto.WarningPlanQueryDTO;
 import com.warning.entity.WarningInfo;
 import com.warning.entity.WarningThreshold;
+import com.warning.mapper.WarningCurrentStatusMapper;
 import com.warning.service.ExcelImportService;
 import com.warning.service.WarningQueryService;
 import com.warning.service.WarningScheduleService;
@@ -14,11 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class WarningController {
@@ -34,6 +38,19 @@ public class WarningController {
 
     @Resource
     private WarningThresholdService warningThresholdService;
+
+    @Resource
+    private WarningCurrentStatusMapper warningCurrentStatusMapper;
+
+    @GetMapping("/debug/columnNames")
+    public Map<String, Object> debugColumnNames() {
+        return warningCurrentStatusMapper.selectOneAsMap();
+    }
+
+    @GetMapping("/debug/warningInfoColumns")
+    public Map<String, Object> debugWarningInfoColumns() {
+        return warningCurrentStatusMapper.selectWarningInfoAsMap();
+    }
 
     /**
      * 分页查询预警信息
@@ -188,18 +205,25 @@ public class WarningController {
     }
 
     /**
-     * 根据预警方案ID查询对应的预警记录
+     * 根据方案ID查询预警（合并接口）
+     * - 不传时间 / 传未来时间：查当前状态（含无预警/已解除），返回 isReleased/noWarningCount
+     * - 传 pointTime（历史整点）：还原该时刻有预警的记录，返回 actualValue/forecastValue
+     * - 传 startTime/endTime：查时间范围内有预警的记录，返回 actualValue/forecastValue
      */
     @GetMapping("/warning/plan")
-    public Map<String, Object> getWarningsByPlanId(@RequestParam Long planId) {
+    public Map<String, Object> getWarningsByPlan(
+            @RequestParam Long planId,
+            @RequestParam(required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date reftime,
+            @RequestParam(required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date startTime,
+            @RequestParam(required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime) {
         Map<String, Object> result = new HashMap<>();
         try {
-            List<WarningInfo> warnings = warningQueryService.queryWarningsByPlanId(planId);
+            List<WarningPlanQueryDTO> data = warningQueryService.queryWarningsByPlan(planId, startTime, endTime, reftime);
             result.put("success", true);
-            result.put("data", warnings);
-            result.put("total", warnings.size());
+            result.put("data", data);
+            result.put("total", data.size());
         } catch (Exception e) {
-            log.error("按方案ID查询预警失败, planId={}", planId, e);
+            log.error("查询预警失败, planId={}", planId, e);
             result.put("success", false);
             result.put("message", "查询失败: " + e.getMessage());
         }

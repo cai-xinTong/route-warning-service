@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warning.mapper.WarningCurrentStatusMapper">
+
+    <resultMap id="warningCurrentStatusMap" type="com.warning.entity.WarningCurrentStatus">
+        <id column="ID" property="id"/>
+        <result column="PLAN_ID" property="planId"/>
+        <result column="GEO_ID" property="geoId"/>
+        <result column="STA_ID" property="staId"/>
+        <result column="STATION_CODE" property="stationCode"/>
+        <result column="STATION_NAME" property="stationName"/>
+        <result column="WARNING_TYPE" property="warningType"/>
+        <result column="WARNING_LEVEL" property="warningLevel"/>
+        <result column="STATUS" property="status"/>
+        <result column="NO_WARNING_COUNT" property="noWarningCount"/>
+        <result column="IS_RELEASED" property="isReleased"/>
+        <result column="RAIN_RELEASE_COUNT" property="rainReleaseCount"/>
+        <result column="LAST_BATCH_TIME" property="lastBatchTime"/>
+        <result column="ACTUAL_VALUE" property="actualValue"/>
+        <result column="FORECAST_VALUE" property="forecastValue"/>
+        <result column="FORECAST_3H_VALUE" property="forecast3hValue"/>
+        <result column="FORECAST_TIME" property="forecastTime"/>
+        <result column="FORECAST_PERIOD" property="forecastPeriod"/>
+    </resultMap>
+
+    <select id="selectByPlanId" resultMap="warningCurrentStatusMap">
+        SELECT id, plan_id, geo_id, sta_id, station_code, station_name, warning_type,
+               warning_level, status, no_warning_count, is_released, rain_release_count, last_batch_time,
+               actual_value, forecast_value, forecast_3h_value, forecast_time, forecast_period
+        FROM warning_current_status
+        WHERE plan_id = #{planId}
+        ORDER BY geo_id, sta_id, warning_type
+    </select>
+
+    <!-- 按唯一键查询：(plan_id, geo_id, sta_id, warning_type) -->
+    <select id="selectByKey" resultMap="warningCurrentStatusMap">
+        SELECT id, plan_id, geo_id, sta_id, station_code, station_name, warning_type,
+               warning_level, status, no_warning_count, is_released, rain_release_count, last_batch_time,
+               actual_value, forecast_value, forecast_3h_value, forecast_time, forecast_period
+        FROM warning_current_status
+        WHERE plan_id = #{planId}
+          AND geo_id = #{geoId}
+          AND sta_id = #{staId}
+          AND warning_type = #{warningType}
+    </select>
+
+    <!-- 首次插入：status=1 时 no_warning_count=0，status=0 时 no_warning_count=1 -->
+    <insert id="insertRecord">
+        <selectKey keyProperty="record.id" resultType="long" order="BEFORE">
+            SELECT seq_warning_current_status.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO warning_current_status (
+            id, plan_id, geo_id, sta_id, station_code, station_name, warning_type,
+            warning_level, status, no_warning_count, is_released, rain_release_count, last_batch_time,
+            actual_value, forecast_value, forecast_3h_value, forecast_time, forecast_period
+        ) VALUES (
+            #{record.id}, #{record.planId}, #{record.geoId}, #{record.staId}, #{record.stationCode}, #{record.stationName}, #{record.warningType},
+            #{record.warningLevel}, #{record.status}, #{record.noWarningCount}, #{record.isReleased}, #{record.rainReleaseCount}, #{record.lastBatchTime, typeHandler=com.warning.typehandler.XuguDateTypeHandler},
+            #{record.actualValue}, #{record.forecastValue}, #{record.forecast3hValue}, #{record.forecastTime, typeHandler=com.warning.typehandler.XuguDateTypeHandler}, #{record.forecastPeriod}
+        )
+    </insert>
+
+    <!-- 更新已有记录，唯一键：(plan_id, geo_id, sta_id, warning_type) -->
+    <update id="updateRecord">
+        UPDATE warning_current_status SET
+            station_name     = #{record.stationName},
+            warning_level    = #{record.warningLevel},
+            status           = #{record.status},
+            no_warning_count = #{record.noWarningCount},
+            is_released      = #{record.isReleased},
+            rain_release_count = #{record.rainReleaseCount},
+            last_batch_time  = #{record.lastBatchTime, typeHandler=com.warning.typehandler.XuguDateTypeHandler},
+            actual_value     = #{record.actualValue},
+            forecast_value   = #{record.forecastValue},
+            forecast_3h_value= #{record.forecast3hValue},
+            forecast_time    = #{record.forecastTime, typeHandler=com.warning.typehandler.XuguDateTypeHandler},
+            forecast_period  = #{record.forecastPeriod}
+        WHERE plan_id      = #{record.planId}
+          AND geo_id       = #{record.geoId}
+          AND sta_id        = #{record.staId}
+          AND warning_type = #{record.warningType}
+    </update>
+
+</mapper>
